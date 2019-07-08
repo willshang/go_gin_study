@@ -7,29 +7,43 @@ import (
 
 func main() {
 	router := gin.Default()
-	
+
 	// This handler will match /user/john but will not match /user/ or /user
+	// 这个handler会匹配/user/john,但是不会匹配/user/或者/user
+	// 200 Hello john http://localhost:8080/user/john
+	// 404 http://localhost:8080/user
+	// 404 http://localhost:8080/user/
 	router.GET("/user/:name", func(c *gin.Context) {
 		name := c.Param("name")
 		c.String(http.StatusOK, "Hello %s", name)
+		return
 	})
-	
+
 	// However, this one will match /user/john/ and also /user/john/send
 	// If no other routers match /user/john, it will redirect to /user/john/
+	// 这个handler会直接匹配/user/john/ 和/user/john/send,
+	// 如果没有其他路由匹配/user/john，会直接匹配/user/john
+	// 200 john is / http://localhost:8080/user/john/
+	// 200 john is /send http://localhost:8080/user/john/send
 	router.GET("/user/:name/*action", func(c *gin.Context) {
 		name := c.Param("name")
 		action := c.Param("action")
 		message := name + " is " + action
 		c.String(http.StatusOK, message)
+		return
 	})
-	
+
 	// For each matched request Context will hold the route definition
+	// 对于每个匹配的请求，上下文将保存路由定义
+	// POST 200 http://localhost:8080/user/john/send
 	router.POST("/user/:name/*action", func(c *gin.Context) {
-		c.FullPath() == "/user/:name/*action" // true
-		c.JSON(http.StatusOK,gin.H{
-			"FullPath":c.FullPath(),
+		result := c.FullPath() == "/user/:name/*action" // true
+		c.JSON(http.StatusOK, gin.H{
+			"FullPath is equal /user/:name/*action": result,
+			"FullPath":                              c.FullPath(),
 		})
+		return
 	})
-	
+
 	router.Run(":8080")
 }
