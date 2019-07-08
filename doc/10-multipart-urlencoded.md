@@ -1,4 +1,5 @@
 # Multipart/urlencoded
+- 06-multipart-urlencoded-form.go
 - multipart/form-data Post下的一种Content-Type类型
 - 知识点
 - c.PostForm() form请求，等价于c.Request.PostFormValue
