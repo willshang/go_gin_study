@@ -1,4 +1,8 @@
 # map 字符串查询和post表单查询参数
+- 08-query+map.go
+- 知识点
+- c.QueryMap() map字符串查询
+- c.PostFormMap() map post表单查询
 ``` 
 package main
 
