@@ -17,12 +17,12 @@ func main() {
 		// Multipart form
 		form, _ := c.MultipartForm()
 		files := form.File["upload[]"]
-		
+
 		for _, file := range files {
 			dst := "/Users/xx/"
 			filename := dst + time.Now().Format("20060102-150405") + "-" + file.Filename
 			c.SaveUploadedFile(file, filename)
-			
+
 			c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded save!\n", filename))
 		}
 		c.String(http.StatusOK, fmt.Sprintf("%d files uploaded!\n", len(files)))
