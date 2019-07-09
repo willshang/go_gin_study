@@ -11,7 +11,7 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	// 创建一个带默认中间件(logger和recovery)的中间件
 	router := gin.Default()
-	
+
 	// http://localhost:8080/ping
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
