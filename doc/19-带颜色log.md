@@ -25,7 +25,7 @@ func main() {
 	router.Run(":8080")
 }
 ```
-- 
+- 强制控制台带颜色的log输出
 ``` 
 package main
 
