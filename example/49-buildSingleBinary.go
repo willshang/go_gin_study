@@ -10,15 +10,15 @@ import (
 
 func main() {
 	r := gin.New()
-	
+
 	t, err := loadTemplate()
 	if err != nil {
 		panic(err)
 	}
 	r.SetHTMLTemplate(t)
-	
+
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "/html/index.tmpl",nil)
+		c.HTML(http.StatusOK, "/html/index.tmpl", nil)
 	})
 	r.Run(":8080")
 }

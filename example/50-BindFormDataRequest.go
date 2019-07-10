@@ -8,12 +8,12 @@ type StructA struct {
 
 type StructB struct {
 	NestedStruct StructA
-	FieldB string `form:"field_b"`
+	FieldB       string `form:"field_b"`
 }
 
 type StructC struct {
 	NestedStructPointer *StructA
-	FieldC string `form:"field_c"`
+	FieldC              string `form:"field_c"`
 }
 
 type StructD struct {
@@ -58,6 +58,6 @@ func main() {
 	r.GET("/getc", GetDataC)
 	// http://localhost:8080/getd?field_x=hello&field_d=world
 	r.GET("/getd", GetDataD)
-	
+
 	r.Run()
 }

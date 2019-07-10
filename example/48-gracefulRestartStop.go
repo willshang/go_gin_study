@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,12 +20,12 @@ func main() {
 		time.Sleep(5 * time.Second)
 		c.String(http.StatusOK, "Welcome Gin Server")
 	})
-	
+
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: router,
 	}
-	
+
 	go func() {
 		// service connections
 		// 服务连接
@@ -33,7 +33,7 @@ func main() {
 			log.Fatalf("listen: %s\n", err)
 		}
 	}()
-	
+
 	// Wait for interrupt signal to gracefully shutdown the server with
 	// a timeout of 5 seconds.
 	// 等待中断信号以优雅地关闭服务器（设置 5 秒的超时时间）
@@ -44,7 +44,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	log.Println("Shutdown Server ...")
-	
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {

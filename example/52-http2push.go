@@ -1,10 +1,9 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
 	"html/template"
 	"log"
-	
-	"github.com/gin-gonic/gin"
 )
 
 var html = template.Must(template.New("https").Parse(`
@@ -23,7 +22,7 @@ func main() {
 	r := gin.Default()
 	r.Static("/assets", "./assets")
 	r.SetHTMLTemplate(html)
-	
+
 	r.GET("/", func(c *gin.Context) {
 		if pusher := c.Writer.Pusher(); pusher != nil {
 			// use pusher.Push() to do server push
@@ -35,7 +34,7 @@ func main() {
 			"status": "success",
 		})
 	})
-	
+
 	// Listen and Server in https://127.0.0.1:8080
 	r.RunTLS(":8080", "./testdata/server.pem", "./testdata/server.key")
 }
