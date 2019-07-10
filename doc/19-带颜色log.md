@@ -2,7 +2,7 @@
 - 17-log-without-color.go
 - 18-log-with-color.go
 - 不带颜色的log输出
-``` 
+```go
 package main
 
 import "github.com/gin-gonic/gin"

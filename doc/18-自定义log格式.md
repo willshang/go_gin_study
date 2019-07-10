@@ -1,6 +1,6 @@
 # 自定义日志格式
 - 16-log-format.go
-``` 
+```go
 package main
 
 import (

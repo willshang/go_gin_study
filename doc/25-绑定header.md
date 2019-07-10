@@ -1,5 +1,5 @@
 # 绑定Header
-``` 
+```go
 package main
 
 import (

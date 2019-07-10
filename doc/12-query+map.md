@@ -3,7 +3,7 @@
 - 知识点
 - c.QueryMap() map字符串查询
 - c.PostFormMap() map post表单查询
-``` 
+```go
 package main
 
 import (

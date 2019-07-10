@@ -1,6 +1,6 @@
 # 绑定查询字符串和post数据
 - 22.bindQueryStringPostData.go
-``` 
+```go
 package main
 
 import (

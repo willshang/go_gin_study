@@ -3,7 +3,7 @@
 - 知识点
 - gin.DisableConsoleColor() 禁用控制台颜色
 - io.MultiWriter() 写入输出到多个writer
-``` 
+```go
 package main
 
 import (

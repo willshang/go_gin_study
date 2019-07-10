@@ -1,6 +1,6 @@
 # 绑定uri
 - 23-bindUri.go
-``` 
+```go
 package main
 
 import "github.com/gin-gonic/gin"
