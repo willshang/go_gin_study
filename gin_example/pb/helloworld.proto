@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+
+package helloworld;
+
+// greeting service
+// protoc --go_out=plugins=grpc:./ ./helloworld.proto
+service Greeter{
+    rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// 请求
+message HelloRequest {
+    string name = 1;
+}
+
+// 返回
+message HelloReply{
+    string message = 1;
+}
