@@ -4,4 +4,7 @@
 sentry中间件（sentry官网: https://sentry.io）
 https://github.com/gin-gonic/gin-sentry
 ```
-- 2.x
+- 2.commonlog
+``` 
+https://github.com/gin-gonic/contrib/tree/master/commonlog
+```
