@@ -1,6 +1,9 @@
 package _5_static
 
 import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -8,9 +11,6 @@ import (
 	"path"
 	"path/filepath"
 	"testing"
-
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
 )
 
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
@@ -23,16 +23,18 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 func TestEmptyDirectory(t *testing.T) {
 	// SETUP file
 	testRoot, _ := os.Getwd()
+	fmt.Println(testRoot)
 	f, err := ioutil.TempFile(testRoot, "")
 	if err != nil {
 		t.Error(err)
 	}
+	fmt.Println(f.Name())
 	defer os.Remove(f.Name())
 	f.WriteString("Gin Web Framework")
 	f.Close()
 
 	dir, filename := filepath.Split(f.Name())
-
+	fmt.Println(dir, filename)
 	router := gin.New()
 	router.Use(ServeRoot("/", dir))
 	router.GET("/", func(c *gin.Context) {
@@ -44,6 +46,7 @@ func TestEmptyDirectory(t *testing.T) {
 	router.GET("/"+filename, func(c *gin.Context) {
 		c.String(200, "this is not printed")
 	})
+
 	w := performRequest(router, "GET", "/")
 	assert.Equal(t, w.Code, 200)
 	assert.Equal(t, w.Body.String(), "index")
@@ -70,6 +73,7 @@ func TestEmptyDirectory(t *testing.T) {
 
 	w = performRequest(router2, "GET", "/static")
 	assert.Equal(t, w.Code, 404)
+
 	router2.GET("/static", func(c *gin.Context) {
 		c.String(200, "index")
 	})
@@ -93,6 +97,7 @@ func TestIndex(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	fmt.Println(testRoot, f.Name())
 	defer os.Remove(f.Name())
 	f.WriteString("index")
 	f.Close()

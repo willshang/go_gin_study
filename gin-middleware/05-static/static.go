@@ -45,7 +45,6 @@ func (l *localFileSystem) Exists(prefix string, filepath string) bool {
 				}
 			}
 		}
-
 		return true
 	}
 	return false
