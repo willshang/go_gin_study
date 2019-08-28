@@ -17,3 +17,7 @@ https://github.com/gin-contrib/expvar
 ``` 
 https://github.com/gin-contrib/cors
 ```
+- 5.static
+``` 
+https://github.com/gin-contrib/static
+```
