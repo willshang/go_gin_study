@@ -9,6 +9,7 @@ import (
 func main() {
 	router := gin.Default()
 
+	// http://localhost:8081/cookie
 	router.GET("/cookie", func(c *gin.Context) {
 		cookie, err := c.Cookie("gin_cookie")
 		if err != nil {
@@ -21,5 +22,5 @@ func main() {
 		})
 		return
 	})
-	router.Run()
+	router.Run(":8081")
 }
