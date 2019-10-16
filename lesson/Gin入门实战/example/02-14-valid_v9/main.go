@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	en2 "github.com/go-playground/locales/en"
 	zh2 "github.com/go-playground/locales/zh"
-	"github.com/go-playground/universal-translator"
+	ut "github.com/go-playground/universal-translator"
 	"gopkg.in/go-playground/validator.v9"
 	en_translations "gopkg.in/go-playground/validator.v9/translations/en"
 	zh_translations "gopkg.in/go-playground/validator.v9/translations/zh"
@@ -18,7 +18,7 @@ type Person struct {
 }
 
 var (
-	Uni      *ut.UniversalTrasnlator
+	Uni      *ut.UniversalTranslator
 	Validate *validator.Validate
 )
 
