@@ -1,6 +1,9 @@
 package dao
 
-import "time"
+import (
+	"go_gin_study/lesson/Gin入门实战/demo/public"
+	"time"
+)
 
 type User struct {
 	ID       int       `json:"id" orm:"column(id);auto"`
@@ -55,7 +58,7 @@ func (u *User) PageList(name string, pageNo int, pageSize int) ([]*User, int64, 
 }
 
 func (u *User) Save() error {
-	if err := public.GormPool.Save(f).Error; err != nil {
+	if err := public.GormPool.Save(u).Error; err != nil {
 		return err
 	}
 	return nil

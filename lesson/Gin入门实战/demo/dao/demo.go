@@ -1,6 +1,9 @@
 package dao
 
-import "time"
+import (
+	"go_gin_study/lesson/Gin入门实战/demo/public"
+	"time"
+)
 
 type Area struct {
 	Id       int       `json:"id" orm:"column(id);auto" description:"自增主键"`
