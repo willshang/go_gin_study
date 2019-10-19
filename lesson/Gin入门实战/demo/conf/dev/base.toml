@@ -1,0 +1,26 @@
+[base]
+    debug_mode="debug"
+    time_location="Asia/Shanghai"
+
+[http]
+    addr=":8880"
+    read_timeout=10
+    write_timeout=10
+    max_header_bytes=20
+    allow_ip=[
+        "127.0.0.1",
+        "192.168.1.1",
+        "::1"
+    ]
+
+[log]
+    log_level="trace"
+    [log.file_writer]
+        on=true
+        log_path="./demo.log"
+        rotate_log_path="./demo.log"
+        wf_log_path="./wf.log"
+        rotate_wf_log_path="./wf.log"
+    [log.console_writer]
+        on=false
+        color=false
