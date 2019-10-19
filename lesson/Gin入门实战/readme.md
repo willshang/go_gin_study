@@ -20,11 +20,11 @@
 - 6.GET localhost:8880/api/loginOut
 - 7.GET localhost:8880/api/user/listPage 
 ``` 
--F page=1
+  -F page=1
 ```
 - 8.GET localhost:8880/api/user/add
 ``` 
- -F name=lisi \
+  -F name=lisi \
   -F sex=1 \
   -F birth=1994-01-01 \
   -F age=15 \
