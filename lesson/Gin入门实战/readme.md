@@ -3,8 +3,8 @@
 - https://github.com/e421083458/golang_common
 
 ## API
-- 1.GET http://localhost:8880/demo/index
-- 2.GET http://localhost:8880/demo/bind
+- 1.GET localhost:8880/demo/index
+- 2.GET localhost:8880/demo/bind
 ``` 
   -F name=zhangsanxx \
   -F age=10 \
@@ -12,7 +12,7 @@
 ```
 - 3.GET localhost:8880/demo/redis
 - 4.GET localhost:8880/demo/dao
-- 5.POST http://localhost:8880/api/login
+- 5.POST localhost:8880/api/login
 ``` 
   -F username=admin \
   -F password=123456
