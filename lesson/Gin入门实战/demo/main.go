@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go_gin_study/lesson/Gin入门实战/common/lib"
 	"go_gin_study/lesson/Gin入门实战/demo/public"
 	"go_gin_study/lesson/Gin入门实战/demo/router"
 	"os"

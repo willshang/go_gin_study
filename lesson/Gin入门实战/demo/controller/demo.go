@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
+	"go_gin_study/lesson/Gin入门实战/common/lib"
 	"go_gin_study/lesson/Gin入门实战/demo/dao"
 	"go_gin_study/lesson/Gin入门实战/demo/dto"
 	"go_gin_study/lesson/Gin入门实战/demo/middleware"
@@ -54,6 +55,6 @@ func (demo *Demo) Bind(c *gin.Context) {
 		middleware.ResponseError(c, 500, err)
 		return
 	}
-	middleware.ResponseSuccess(c, "")
+	middleware.ResponseSuccess(c, st)
 	return
 }

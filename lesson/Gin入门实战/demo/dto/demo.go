@@ -10,9 +10,9 @@ import (
 )
 
 type InStruct struct {
-	Name     string `form:"name" validate:"required"`
-	Age      int64  `form:"age" validate:"required"`
-	Password string `form:"password" validate:"required"`
+	Name     string `form:"name" validate:"required" json:"name" `
+	Age      int64  `form:"age" validate:"required" json:"age"`
+	Password string `form:"password" validate:"required" json:"password"`
 }
 
 func (i *InStruct) BindingValidParams(c *gin.Context) error {

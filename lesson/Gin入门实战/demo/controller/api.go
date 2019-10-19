@@ -36,6 +36,7 @@ func (a *Api) LoginOut(c *gin.Context) {
 	session := sessions.Default(c)
 	session.Delete("user")
 	session.Save()
+	middleware.ResponseSuccess(c, "success")
 	return
 }
 

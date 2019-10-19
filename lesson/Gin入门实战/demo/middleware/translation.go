@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
+	"go_gin_study/lesson/Gin入门实战/demo/public"
 	en_translations "gopkg.in/go-playground/validator.v9/translations/en"
 	zh_translations "gopkg.in/go-playground/validator.v9/translations/zh"
 	zh_tw_translations "gopkg.in/go-playground/validator.v9/translations/zh_tw"

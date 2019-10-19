@@ -1,8 +1,15 @@
 package lib
 
 import (
+	"bytes"
 	"database/sql"
+	"github.com/e421083458/gorm"
 	"github.com/spf13/viper"
+	dLog "go_gin_study/lesson/Gin入门实战/common/log"
+	"io/ioutil"
+	"os"
+	"strings"
+	"time"
 )
 
 type BaseConf struct {
@@ -36,20 +43,20 @@ type LogConfig struct {
 
 // mysql
 type MysqlMapConf struct {
-	List map[string]*MysqlMapConf `mapstructure:"list"`
+	List map[string]*MySQLConf `mapstructure:"list"`
 }
 
 type MySQLConf struct {
 	DriverName      string `mapstructure:"driver_name"`
 	DataSourceName  string `mapstructure:"data_source_name"`
 	MaxOpenConn     int    `mapstructure:"max_open_conn"`
-	MaxIdleCoon     int    `mapstructure:"max_idle_conn"`
+	MaxIdleConn     int    `mapstructure:"max_idle_conn"`
 	MaxConnLifeTime int    `mapstructure:"max_conn_life_time"`
 }
 
 // redis
 type RedisMapConf struct {
-	List map[string]*RedisMapConf `mapstructure:"list"`
+	List map[string]*RedisConf `mapstructure:"list"`
 }
 
 type RedisConf struct {
@@ -130,4 +137,145 @@ func InitRedisConf(path string) error {
 	}
 	ConfRedisMap = ConfRedis
 	return nil
+}
+
+func InitViperConf() error {
+	f, err := os.Open(ConfEnvPath + "/")
+	if err != nil {
+		return nil
+	}
+	fileList, err := f.Readdir(1024)
+	if err != nil {
+		return err
+	}
+	for _, f0 := range fileList {
+		if !f0.IsDir() {
+			bts, err := ioutil.ReadFile(ConfEnvPath + "/" + f0.Name())
+			if err != nil {
+				return err
+			}
+			v := viper.New()
+			v.SetConfigType("toml")
+			v.ReadConfig(bytes.NewBuffer(bts))
+			pathArr := strings.Split(f0.Name(), ".")
+			if ViperConfMap == nil {
+				ViperConfMap = make(map[string]*viper.Viper)
+			}
+			ViperConfMap[pathArr[0]] = v
+		}
+	}
+	return nil
+}
+
+func GetStringConf(key string) string {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return ""
+	}
+	v, ok := ViperConfMap[keys[0]]
+	if !ok {
+		return ""
+	}
+	confString := v.GetString(strings.Join(keys[1:len(keys)], "."))
+	return confString
+}
+
+func GetStringMapConf(key string) map[string]interface{} {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return nil
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetStringMap(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetConf(key string) interface{} {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return nil
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.Get(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetBoolConf(key string) bool {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return false
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetBool(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetFloat64Conf(key string) float64 {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return 0
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetFloat64(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetIntConf(key string) int {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return 0
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetInt(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetStringMapStringConf(key string) map[string]string {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return nil
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetStringMapString(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetStringSliceConf(key string) []string {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return nil
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetStringSlice(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetTimeConf(key string) time.Time {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return time.Now()
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetTime(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func GetDurationConf(key string) time.Duration {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return 0
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.GetDuration(strings.Join(keys[1:len(keys)], "."))
+	return conf
+}
+
+func IsSetConf(key string) bool {
+	keys := strings.Split(key, ".")
+	if len(keys) < 2 {
+		return false
+	}
+	v := ViperConfMap[keys[0]]
+	conf := v.IsSet(strings.Join(keys[1:len(keys)], "."))
+	return conf
 }

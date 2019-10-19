@@ -3,6 +3,7 @@ package middleware
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"go_gin_study/lesson/Gin入门实战/common/lib"
 )
 
 type ResponseCode int
