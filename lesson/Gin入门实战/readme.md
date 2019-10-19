@@ -4,7 +4,7 @@
 
 ## API
 - 1.GET http://localhost:8880/demo/index
-- 2.http://localhost:8880/demo/bind
+- 2.GET http://localhost:8880/demo/bind
 ``` 
   -F name=zhangsanxx \
   -F age=10 \
