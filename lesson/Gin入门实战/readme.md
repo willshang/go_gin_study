@@ -41,6 +41,6 @@
 ```
 - 10.GET localhost:8880/api/user/remove
 ``` 
-
+  -F ids=3
 ```
 - 11.GET localhost:8880/api/user/batchRemove
